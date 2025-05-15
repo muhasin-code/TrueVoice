@@ -1,0 +1,98 @@
+{% include 'student/student_header.html' %}
+
+<div class="untree_co-hero" style="background-image: url('static/images/home1.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <!-- Campaigns Table -->
+                    <div class="col-lg-6 text-center">
+                        <form action="" style="border: 2px solid #ccc; padding: 30px; background-color: rgba(255, 255, 255, 0.9); border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                            <h2 style="margin-bottom: 20px;">Campaigns</h2>
+
+                            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                                <thead>
+                                    <tr style="background-color: #f8f8f8;">
+                                        <th style="border: 1px solid #ddd; padding: 10px;">Sl. No</th>
+                                        <th style="border: 1px solid #ddd; padding: 10px;">Campaign Name</th>
+                                        <th style="border: 1px solid #ddd; padding: 10px;">Venue</th>
+                                        <th style="border: 1px solid #ddd; padding: 10px;">Campaign Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in data['view'] %}
+                                    <tr>
+                                        <td style="border: 1px solid #ddd; padding: 10px;">{{ loop.index }}</td>
+                                        <td style="border: 1px solid #ddd; padding: 10px;">{{ i.campaign_name }}</td>
+                                        <td style="border: 1px solid #ddd; padding: 10px;">{{ i.venue }}</td>
+                                        <td style="border: 1px solid #ddd; padding: 10px;">{{ i.campaign_date }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+
+                    <!-- Campaigns Gallery -->
+                    <div class="col-lg-6">
+                        <div class="widget">
+                            <h3>Gallery</h3>
+                            <ul class="instafeed instagram-gallery list-unstyled">
+                                <li><img src="static/images/camp1.jpeg" alt="Campaign 1" class="gallery-item" height="776px" width="456px"></li>
+                                <li><img src="static/images/camp2.jpeg" alt="Campaign 2" class="gallery-item"></li>
+                                <li><img src="static/images/camp3.jpeg" alt="Campaign 3" class="gallery-item"></li>
+                                <li><img src="static/images/camp1.jpeg" alt="Campaign 4" class="gallery-item"></li>
+                                <li><img src="static/images/camp2.jpeg" alt="Campaign 5" class="gallery-item"></li>
+                                <li><img src="static/images/camp3.jpeg" alt="Campaign 6" class="gallery-item"></li>
+                            </ul>
+                        </div> <!-- /.widget -->
+                    </div> <!-- /.col-lg-6 -->
+                </div>
+            </div>
+        </div> <!-- /.row -->
+    </div> <!-- /.container -->
+</div> <!-- /.untree_co-hero -->
+
+{% include 'public/footer.html' %}
+<style>
+    .gallery-item {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.05);
+    }
+
+    .instafeed {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .instafeed li {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .widget h3 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .col-lg-6 {
+            margin-bottom: 30px;
+        }
+    }
+</style>

@@ -1,0 +1,101 @@
+{% include 'student/student_header.html' %}
+<div class="untree_co-hero" style="background-image: url('static/images/home1.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <form action="" method="post" onsubmit="return validateNominationDate()" 
+                            style="border: 2px solid #ddd; padding: 30px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.95); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                            <!-- Apply as Candidate -->
+                            <h1 style="margin-bottom: 20px;">Apply as Candidate</h1>
+                            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                                <tbody>
+                                    <tr>
+                                        <th style="text-align: left; padding: 10px; border-bottom: 1px solid #ddd;">Election</th>
+                                        <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+                                            <select id="election-select" name="election_id" class="form-control" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+                                                <option value="">Select election</option>
+                                                {% for election in data['election'] %}
+                                                    {% if election.status != 'start' and election.status != 'completed' %}
+                                                        <option value="{{ election.election_id }}" data-enddate="{{ election.enddate }}">{{ election.election_name }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: left; padding: 10px; border-bottom: 1px solid #ddd;">Post</th>
+                                        <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+                                            <select id="post-select" name="post_id" class="form-control" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+                                                <option value="">Select post</option>
+                                                {% for post in data['post'] %}
+                                                    <option value="{{ post.post_id }}" data-election="{{ post.election_id }}">{{ post.post_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="padding-top: 20px;">
+                                            <input type="submit" class="form-control btn btn-primary" name="submit" value="Apply" style="width: 100%; padding: 10px; border-radius: 5px; cursor: pointer;">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /.row -->
+    </div> <!-- /.container -->
+</div> <!-- /.untree_co-hero -->
+{% include 'public/footer.html' %}
+
+<script>
+// JavaScript to filter posts based on the selected election
+document.getElementById('election-select').addEventListener('change', function () {
+    var selectedElection = this.value;
+    var postSelect = document.getElementById('post-select');
+
+    // Reset the post options
+    Array.from(postSelect.options).forEach(function(option) {
+        if (option.value === "" || option.getAttribute('data-election') === selectedElection) {
+            option.style.display = 'block';
+        } else {
+            option.style.display = 'none';
+        }
+    });
+
+    // Reset the selected post
+    postSelect.value = "";
+});
+
+// Validate nomination end date
+function validateNominationDate() {
+    var electionSelect = document.getElementById('election-select');
+    var selectedOption = electionSelect.options[electionSelect.selectedIndex];
+
+    if (!selectedOption) {
+        alert("Please select an election.");
+        return false;
+    }
+
+    var endDateStr = selectedOption.getAttribute('data-enddate');
+    var electionEndDate = new Date(endDateStr);
+
+    // Get today's date
+    var today = new Date();
+
+    // Remove the time part to compare the dates (only compare year/month/day)
+    today.setHours(0, 0, 0, 0);
+    electionEndDate.setHours(0, 0, 0, 0);
+
+    // Compare the dates
+    if (today > electionEndDate) {
+        alert("The election nomination period has ended. You cannot apply for this election.");
+        return false;
+    }
+
+    return true;
+}
+</script>

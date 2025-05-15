@@ -1,0 +1,41 @@
+{% include 'candidate/candidate_header.html' %}
+<div class="untree_co-hero  " style="background-image: url('static/images/home2.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <br><br><br>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 text-center">
+                        <form action="" method="post" style="border: 2px solid #ccc; padding: 40px; border-radius: 40px; background-color: rgba(255, 255, 255, 0.9); box-shadow: 0 10px 10px rgba(0,0,0,0.1);">
+                            <h2 style="margin-bottom: 20px;">PROFILE</h2>
+
+                            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                                {% for i in data['stud'] %}
+                                <div style="border: 1px solid #ddd; border-radius: 20px; width: 700px; padding: 30px; box-shadow: 0 30px 8px rgba(0, 0, 0, 0.1);">
+                                    <h3 style="margin-top: 0;">{{ i.first_name }} {{ i.last_name }}</h3>
+                                    <p style="margin: 5px 0;"><strong>Course Name:</strong> {{ i.course_name }}</p>
+                                    <p style="margin: 5px 0;"><strong>Email:</strong> {{ i.email }}</p>
+                                    <p style="margin: 5px 0;"><strong>Phone:</strong> {{ i.phone }}</p>
+                                    <p style="margin: 5px 0;"><strong>Gender:</strong> {{ i.gender }}</p>
+                                    <p style="margin: 5px 0;"><strong>Date of Birth:</strong> {{ i.dob }}</p>
+                                    <p style="margin: 5px 0;"><strong>House Name:</strong> {{ i.house_name }}</p>
+                                    <p style="margin: 5px 0;"><strong>Place:</strong> {{ i.place }}</p>
+                                    <p style="margin: 5px 0;"><strong>Pincode:</strong> {{ i.pincode }}</p>
+
+                                <a href="/cd_change_password" class=" btn btn-secondary" > change password</a>
+
+                                </div>
+
+                                {% endfor %}
+                            </div>
+                            
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="untree_co-hero  " style="background-image: url('static/images/home3.jpeg'); padding: 70px 50px;">
+</div>

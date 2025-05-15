@@ -1,0 +1,117 @@
+{% include 'candidate/candidate_header.html' %}
+
+<div class="untree_co-hero  " style="background-image: url('static/images/home2.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+
+    {% if data['up'] %}
+    <form action="" method="post" style=" margin-top: 120px; width: 100%; border: 1px solid #ccc; padding: 1px; border-radius: 1px; background-color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h3 style="margin-bottom: 20px;">UPDATE CAMPAIGN</h3>
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <th style="padding: 10px; text-align: left;">Campaign Name</th>
+                <td style="padding: 10px;"><input type="text" name="campaign_name" value="{{ data['up'][0]['campaign_name'] }}" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left;">Venue</th>
+                <td style="padding: 10px;"><input type="text" name="venue" value="{{ data['up'][0]['venue'] }}" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left;">Campaign Date</th>
+                <td style="padding: 10px;"><input type="date" name="campaign_date" value="{{ data['up'][0]['campaign_date'] }}" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center; padding-top: 15px;"><input type="submit" name="updates" value="Update Campaign" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;"></td>
+            </tr>
+        </table>
+    </form>
+    {% else %}
+    <form action="" method="post" style=" margin-top: 120px; border: 1px solid #ccc; padding: 8px; border-radius: 10px; background-color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h3 style="margin-bottom: 20px;">ADD CAMPAIGN</h3>
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+                <th style="padding: 10px; text-align: left;">Campaign Name</th>
+                <td style="padding: 10px;"><input type="text" name="campaign_name" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left;">Venue</th>
+                <td style="padding: 10px;"><input type="text" name="venue" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <th style="padding: 10px; text-align: left;">Campaign Date</th>
+                <td style="padding: 10px;"><input type="date" name="campaign_date" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center; padding-top: 15px;"><input type="submit" name="submit" value="Add Campaign" style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;"></td>
+            </tr>
+        </table>
+    </form>
+    {% endif %}
+    <form action="" method="post" style=" padding: 5px ; border-radius: 1px;   margin: 0 auto; margin-top: 10px;">
+
+    <table style="width: 150%; border-collapse: collapse; margin-top: 20px; align-content: center;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="border: 1px solid #ddd; padding: 10px;">Sl. No</th>
+                <th style="border: 1px solid #ddd; padding: 10px; width: 20%;">Campaign Name</th>
+                <th style="border: 1px solid #ddd; padding: 10px;">Date</th>
+                <th style="border: 1px solid #ddd; padding: 10px; width: 20%;">Venue</th>
+                <th style="border: 1px solid #ddd; padding: 10px;">Campaign Date</th>
+                <th style="border: 1px solid #ddd; padding: 10px; width: 50%;">Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data['view'] %}
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 10px; color: white;">{{ loop.index }}</td>
+                <td style="border: 1px solid #ddd; padding: 10px;color: white;">{{ i.campaign_name }}</td>
+                <td style="border: 1px solid #ddd; padding: 10px;color: white;">{{ i.date }}</td>
+                <td style="border: 1px solid #ddd; padding: 10px;color: white;">{{ i.venue }}</td>
+                <td style="border: 1px solid #ddd; padding: 10px;color: white;">{{ i.campaign_date }}</td>
+                <td style="border: 1px solid #ddd; padding: 10px;">
+                    <a href="?action=update&campaign_id={{ i.campaign_id }}"class="btn btn-sm btn-warning" style="color: black; text-decoration: none;">Edit</a>
+                    <a href="?action=delete&campaign_id={{ i.campaign_id }}"class="btn btn-sm btn-danger" style="color:black; text-decoration: none;  margin-left: 10px;">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("input[name='campaign_name']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+            $("input[name='campaign_date']").on('blur', function(e) {
+            const electionDateValue = $(this).val();  // Get the entered election date
+            const electionDate = new Date(electionDateValue);
+            const today = new Date();
+
+            // Set the time of today to the start of the day for accurate comparison
+            today.setHours(0, 0, 0, 0); 
+
+            // Check if the election date is before today
+            if (electionDate <= today) {
+                alert("Election date must be in the future.");
+                $(this).val('');  // Clear the invalid date
+            }
+        });
+
+            $("input[name='venue']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+            });
+        });
+    </script>
+    
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.row -->
+</div> <!-- /.container -->
+</div> <!-- /.untree_co-hero -->
+<div class="untree_co-hero  " style="background-image: url('static/images/home3.jpeg'); padding: 70px 50px;">

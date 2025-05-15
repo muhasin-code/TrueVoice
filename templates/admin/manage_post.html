@@ -1,0 +1,114 @@
+{% include 'admin/admin_header.html' %}
+
+
+<div class="untree_co-hero  " style="background-image: url('static/images/home2.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <br><br><br><br><br><br>
+
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+<body style="font-family: Arial, sans-serif;">
+
+    {% if data['up'] %}
+    <form action="" method="post" style="border: 2px solid #ccc; padding: 20px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.9); box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
+        <h3 style="text-align: center; margin-bottom: 20px;">UPDATE POST</h3>
+        <table style="width: 100%; border-spacing: 15px;">
+            <tr>
+                <th style="text-align: left; padding-bottom: 10px;">Election</th>
+                <td>
+                    <select name="election_id" class="form-control" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                        <option value="{{data['up'][0]['i.election_id']}}">{{data['up'][0]['election_name']}}</option>
+                        <option value="">Select election</option>
+                        {% for i in data['election'] %}
+                        <option value="{{i.election_id}}">{{i.election_name}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th style="text-align: left; padding-bottom: 10px;">Post Name</th>
+                <td><input type="text" name="post_name" value="{{ data['up'][0]['post_name'] }}" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></td>
+            </tr>
+           
+            <tr>
+                <td colspan="2" style="text-align: center; padding-top: 20px;"><input type="submit" name="updates" style="padding: 10px 20px; border-radius: 5px; background-color: #007bff; color: white; border: none; cursor: pointer;"></td>
+            </tr>
+        </table>
+    </form>
+    <br><br><br>
+
+    {% else %}
+    <form action="" method="post" style="border: 2px solid #ccc; padding: 20px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.9); box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
+        <h3 style="text-align: center; margin-bottom: 20px;">Manage Post</h3>
+        <table style="width: 100%; border-spacing: 15px;">
+            <tr>
+                <th style="text-align: left; padding-bottom: 10px;">Election</th>
+                <td>
+                    <select name="election" class="form-control" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                        <option value="">Select Election</option>
+                        {% for i in data['election'] %}
+                             {% if i.status != 'start' and i.status != 'completed' %}
+                                <option value="{{ i.election_id }}">{{ i.election_name }}</option>
+                             {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th style="text-align: left; padding-bottom: 10px;">Post Name</th>
+                <td><input type="text" name="post_name" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" style="text-align: center; padding-top: 20px;"><input type="submit" name="submit" style="padding: 10px 20px; border-radius: 5px; background-color: #28a745; color: white; border: none; cursor: pointer;"></td>
+            </tr>
+
+        </table>
+    </form>
+    {% endif %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <hr style="margin: 40px 0;">
+    <h3 style="margin-bottom: 20px;"> POST</h3>
+
+    <table style="width: 100%; border-collapse: collapse; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 10px; border: 1px solid #ddd;">Sl. No</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">Election</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">Post Name</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">Date</th>
+            <th style="padding: 10px; border: 1px solid #ddd;">Action</th>
+        </tr>
+        {% for i in data['view'] %}
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; color: white;">{{ loop.index }}</td>
+            <td style="padding: 10px; border: 1px solid #ddd;color: white;">{{ i.election_name }}</td>
+            <td style="padding: 10px; border: 1px solid #ddd;color: white;">{{ i.post_name }}</td>
+            <td style="padding: 10px; border: 1px solid #ddd;color: white;">{{ i.date }}</td>
+            <td style="padding: 10px; border: 1px solid #ddd;color: white;">
+                <a href="?action=update&post_id={{ i.post_id }}"class="btn btn-sm btn-warning" style="color: black;">Edit</a>
+                <a href="?action=delete&post_id={{ i.post_id }}"class="btn btn-sm btn-danger" style="color: black; margin-left: 10px;">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</div>
+</div>
+</div> <!-- /.row -->
+</div> <!-- /.container -->
+</div> <!-- /.untree_co-hero -->
+<div class="untree_co-hero  " style="background-image: url('static/images/home3.jpeg'); padding: 70px 50px;">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        $(function() {
+            $("input[name='post_name']").on('input', function(e) {
+                $(this).val($(this).val().replace(/[^A-Za-z ]/g, ''));
+            });
+        });
+    </script>
+
+
+

@@ -1,0 +1,172 @@
+{% include 'admin/admin_header.html' %}
+
+
+<style>
+    .cont{
+        margin-top: 5px;
+    }
+</style>
+
+<div class="untree_co-hero  " style="background-image: url('static/images/home2.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <br><br><br><br>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="cont">  
+                <div class="row justify-content-center">
+                    
+                    <!-- Centered form: Update/Add Election -->
+                    <div class="col-lg-8 text-center">
+                        <!-- Update Election Form -->
+                        {% if data['up'] %}
+                        <form action="" method="post" style="border: 2px solid #ccc; padding: 30px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.9); box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 0 auto;">
+                            <h3 style="text-align: center; margin-bottom: 30px; font-family: Arial, sans-serif;">UPDATE ELECTION</h3>
+                            <table style="width: 100%; border-spacing: 15px;">
+                                <tr>
+                                    <th style="text-align: left; width: 40%;">Election Name</th>
+                                    <td><input type="text" name="election_name" value="{{ data['up'][0]['election_name'] }}" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required></td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: left;">Date</th>
+                                    <td><input type="date" name="date" value="{{ data['up'][0]['date'] }}" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required></td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: left;">Venue</th>
+                                    <td><input type="text" name="venue" value="{{ data['up'][0]['venue'] }}" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: center; padding-top: 20px;">
+                                        <input type="submit" name="updates" value="Update Election" style="padding: 10px 20px; border-radius: 5px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                     
+                        {% endif %}
+
+                        <!-- Add Election Form -->
+                        {% if not data['up'] %}
+                        <form action="" method="post" style="border: 1px solid #ccc; padding: 5px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.9); box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 0 auto; margin-top: 30px;">
+                            <h3 style="text-align: center; margin-bottom: 30px; font-family: Arial, sans-serif;">ADD ELECTION</h3>
+                            <table style="width: 100%; border-spacing: 10px;">
+                                <tr>
+                                    <th style="text-align: center; width: 40%;">ELECTION NAME</th>
+                                    <td><input type="text" name="election_name" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required></td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center;">END DATE</th>
+                                    <td><input type="date" name="enddate" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required></td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center;">DATE</th>
+                                    <td><input type="date" name="date" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required></td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center;">VENUE</th>
+                                    <td><input type="text" name="venue" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" required></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: center; padding-top: 20px;">
+                                        <input type="submit" name="submit" value="Add Election" style="padding: 10px 20px; border-radius: 5px; background-color: #28a745; color: white; border: none; cursor: pointer;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        
+                        {% endif %}
+                    </div>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <br><br><br>
+
+                    
+        <hr style="border-top: 1px solid #ccc; margin: 40px 0;">
+
+
+        <form action="" method="post" style="border: 2px solid #ccc; padding: 30px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.9); box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 0 auto; margin-top: 30px;">
+            <h3 style="margin-bottom: 20px;"> ELECTION</h3>
+
+
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <tr style="background-color: #f2f2f2;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">Sl. No</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Election Name</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">Date</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">End Date</th>
+
+                        <th style="padding: 10px; border: 1px solid #ddd;">Venue</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">status</th>
+
+
+                        <th style="padding: 10px; border: 1px solid #ddd;">Action</th>
+                    </tr>
+                    {% for i in data['view'] %}
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ loop.index }}</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ i.election_name }}</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ i.date }}</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ i.enddate }}</td>
+
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ i.venue }}</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ i.status }}</td>
+
+                        <td style="padding: 10px; border: 1px solid #ddd;">
+                            {% if i.status == 'pending' %}
+
+                            <a href="?action=start&election_id={{ i.election_id }}" class="btn btn-sm btn-warning" style="color: black;">start</a>
+                            {% elif i.status == 'start' %}
+
+                            <a href="?action=completed&election_id={{ i.election_id }}" class="btn btn-sm btn-danger" style="color: white;">stop</a>
+                        {% endif %}
+
+
+
+
+
+
+                            
+                            <a href="?action=update&election_id={{ i.election_id }}" class="btn btn-sm btn-warning" style="color: black;">Edit</a>
+                            <a href="?action=delete&election_id={{ i.election_id }}"class="btn btn-sm btn-danger"  style="color: black; margin-left: 10px;">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                </form>
+            </div> 
+            </div>  
+            </div>
+        </div>
+    </div> <!-- /.container -->
+</div> <!-- /.untree_co-hero -->
+<div class="untree_co-hero  " style="background-image: url('static/images/home3.jpeg'); padding: 70px 50px;">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+    $(function() {
+        $("input[name='election_name']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+        });
+        $("input[name='date']").on('blur', function(e) {
+            const electionDateValue = $(this).val();  // Get the entered election date
+            const electionDate = new Date(electionDateValue);
+            const today = new Date();
+
+            // Set the time of today to the start of the day for accurate comparison
+            today.setHours(0, 0, 0, 0); 
+
+            // Check if the election date is before today
+            if (electionDate <= today) {
+                alert("Election date must be in the future.");
+                $(this).val('');  // Clear the invalid date
+            }
+        });
+
+        $("input[name='venue']").on('input', function(e) {
+            $(this).val($(this).val().replace(/[^A-Za-z0-9()/. ]/g, ''));
+        });
+    });
+</script>
+
+
+

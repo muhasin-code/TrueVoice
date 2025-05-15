@@ -1,0 +1,67 @@
+{% include 'admin/admin_header.html' %}
+<div class="untree_co-hero  " style="background-image: url('static/images/home2.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <br><br><br><br><br>
+
+        <div class="row align-items-center justify-content-center">
+
+            <div class="col-lg-16" style="padding: 10px;">
+                <div style="overflow-x: auto; width: 100%;"> <!-- Wrapper for horizontal scroll -->
+                    <table class="table table-bordered">
+                        <thead style="background-color: burlywood; color: brown;">
+                            <tr>
+                                <h1 style="color: white; margin-bottom: 10px; text-align: center;">Candidates</h1>
+
+
+                            <table style=" border-collapse: collapse; margin-bottom: 20px; align-items: center; width: 50;">
+                                <thead>
+                                    <tr style=" width: 100%;background-color: #f1f1f1;">
+                                        <th style="border: 1px solid #ddd; padding: 10px; width: 50%;">Sl No</th>
+                                        <th style="border: 1px solid #ddd; padding: 10px; width: 50%;">Candidate Name</th>
+                                        <th style="border: 1px solid #ddd; padding: 10px; width: 50%;">Course Name</th>
+                                        <th style="border: 1px solid #ddd; padding: 30px; width: 100%;">Election Name</th>
+                                        <th style="border: 1px solid #ddd; padding: 10px; width: 50%;">Post Name</th>
+                                        <th style="border: 1px solid #ddd; padding: 10px; width: 50%;">Status</th>
+                                        <th style="border: 1px solid #ddd; padding: 20px; width: 50%;">Action</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in data['view'] %}
+                                    <tr>
+                                        <td style="border: 1px solid #ddd; padding: 10px; color: white;">{{ loop.index }}</td>
+                                        <td style="border: 1px solid #ddd; padding: 10px; color: white;">{{ i.first_name }}</td>
+                                        <td style="border: 1px solid #ddd; padding: 10px; color: white;">{{ i.course_name }}</td>
+                                        <td style="border: 1px solid #ddd; padding: 10px; color: white;">{{ i.election_name }}</td>
+                                        <td style="border: 1px solid #ddd; padding: 10px; color: white;">{{ i.post_name }}</td>
+                                        <td style="border: 1px solid #ddd; padding: 10px; color: white;">{{ i.status }}</td>
+                                        {% if i.status == 'approved' %}
+                                            <td><p style="margin: 0; color: greenyellow;">Approved</p>
+                                           </td>
+                                        {% elif i.status == 'rejected' %}
+                                        <td>
+                                            <p style="margin: 0; color: red;">Rejected</p>
+                                        </td>
+
+                                        {% else %}
+                                            <td>
+                                                <a href="?action=approve&student_id={{ i.student_id }}" class="btn btn-primary btn-sm" >Approve</a><hr>
+                                                <a href="?action=reject&student_id={{ i.student_id }}" class="btn btn-danger btn-sm">Reject</a>
+                                            </td>
+                                        {% endif %}
+                                   
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /.row -->
+    </div> <!-- /.container -->
+</div> <!-- /.untree_co-hero -->
+<div class="untree_co-hero  " style="background-image: url('static/images/home3.jpeg'); padding: 70px 50px;">
+
+        

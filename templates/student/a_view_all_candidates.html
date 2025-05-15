@@ -1,0 +1,102 @@
+{% include 'student/student_header.html' %} 
+
+
+
+{% if data['views']%}
+
+
+
+
+
+
+<div class="untree_co-hero  " style="background-image: url('static/images/home2.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <br><br><br><br>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 style=" text-align: center; color: white;">CANDIDATES</h2>
+
+                        <div class="row">
+                            {% for i in data['view'] %}
+                            <div class="col-md-6 mb-2"> <!-- Two cards per row -->
+                                <div class="card" style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; background-color: #ffffff;">
+                                    <div class="card-body">
+                                        <form action="" method="POST" style="display: inline;">
+
+                                        <h1 class="card-title" style="color: burlywood;">{{ i.first_name }}</h1>
+                                        <p class="card-text"><strong>Course:</strong> {{ i.course_name }}</p>
+                                        <p class="card-text"><strong>Election:</strong> {{ i.election_name }}</p>
+                                        <p class="card-text"><strong>Post:</strong> {{ i.post_name }}</p>
+
+                                        
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /.row -->
+
+    </div> <!-- /.container -->
+</div> <!-- /.untree_co-hero -->
+
+<!-- Additional content below to prevent overlap -->
+
+<div class="untree_co-hero  " style="background-image: url('static/images/home3.jpeg'); padding: 70px 50px;">
+    
+</div>
+
+{% else %}
+
+
+
+<div class="untree_co-hero  " style="background-image: url('static/images/home2.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <br><br><br><br>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 style=" text-align: center; color: white;">CANDIDATES</h2>
+
+                        <div class="row">
+                            {% for i in data['view'] %}
+                            <div class="col-md-6 mb-2"> <!-- Two cards per row -->
+                                <div class="card" style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; background-color: #ffffff;">
+                                    <div class="card-body">
+                                        <form action="" method="POST" style="display: inline;">
+
+                                        <h1 class="card-title" style="color: burlywood;">{{ i.first_name }}</h1>
+                                        <p class="card-text"><strong>Course:</strong> {{ i.course_name }}</p>
+                                        <p class="card-text"><strong>Election:</strong> {{ i.election_name }}</p>
+                                        <p class="card-text"><strong>Post:</strong> {{ i.post_name }}</p>
+
+                                        
+                                        <a class="btn btn-danger" href="?action=sotp&candidate_id={{ i.candidate_id }}&email={{ i.email }}&election_id={{ i.election_id }}&post_id={{ i.post_id }}&student_id={{ i.student_id }}">VOTE</a>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /.row -->
+
+    </div> <!-- /.container -->
+</div> <!-- /.untree_co-hero -->
+
+<!-- Additional content below to prevent overlap -->
+
+<div class="untree_co-hero  " style="background-image: url('static/images/home3.jpeg'); padding: 70px 50px;">
+    
+</div>
+{%endif%}

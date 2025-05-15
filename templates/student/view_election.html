@@ -1,0 +1,47 @@
+{% include 'student/student_header.html' %}
+<div class="untree_co-hero  " style="background-image: url('static/images/home2.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <br><br><br><br>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10  ">
+                        <h2 style="margin-bottom: 20px; text-align: center; color: white;">Elections</h2>
+
+                        <div class="row">
+                            {% for i in data['view'] %}
+                            <div class="col-md-6 mb-2">
+                                <div class="card" style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; background-color: #f9f9f9;">
+                                    <div class="card-body">
+                                        <h1 class="card-title" style="margin-bottom: 15px;color: burlywood;">{{ i.election_name }}</h1>
+                                        <p><strong>Date:</strong> {{ i.date }}</p>
+                                        <p><strong>Venue:</strong> {{ i.venue }}</p>
+                                        {% if i.status == 'start' %}
+
+                                        <td style="border: 1px solid #ddd; padding: 10px;"><a href="/view_post?id={{i.election_id}}"class="btn btn-primary"  style="color: #007bff; text-decoration: none; color: white;">VIEW POST</a></td>
+ 
+                                        {% elif i.status == 'completed' %}
+                                        <p>election completed</p>
+
+                                        {% else  %}
+                                        <p>pending</p>
+
+
+                                        {% endif %}
+
+ 
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /.row -->
+    </div> <!-- /.container -->
+</div> <!-- /.untree_co-hero -->
+<div class="untree_co-hero  " style="background-image: url('static/images/home3.jpeg'); padding: 70px 50px;">
+
+
+    

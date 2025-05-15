@@ -1,0 +1,35 @@
+{% include 'admin/admin_header.html' %}
+
+<div class="untree_co-hero  " style="background-image: url('static/images/home2.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <br><br><br>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <!-- <div style="border: 2px solid #ddd; padding: 20px; background-color: #f9f9f9; border-radius: 10px;"> -->
+                            <h2 style="margin-bottom: 20px; text-align: center; color:white;">WINNER</h2>
+                            
+                            <div class="row">
+                                {% for i in data['viewsss'] %}
+                                <div class="col-md-6">
+                                    <div class="card" style="border: 1px solid #ddd; border-radius: 10px; margin-bottom: 20px; padding: 20px; background-color: #ffffff;">
+                                        <div class="card-body">
+                                            <h2 class="card-title" style="margin-bottom: 15px; color: burlywood;"> {{ i.first_name }}</h2>
+                                            <p class="card-text"><strong>Course:</strong> {{ i.course_name }}</p>
+                                            <p class="card-text"><strong>Total Votes:</strong> {{ i.result }}</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /.row -->
+    </div> <!-- /.container -->
+</div> <!-- /.untree_co-hero -->
+
+<div class="untree_co-hero  " style="background-image: url('static/images/home3.jpeg'); padding: 70px 50px;">

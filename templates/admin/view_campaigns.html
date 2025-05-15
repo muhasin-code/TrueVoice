@@ -1,0 +1,47 @@
+{% include 'admin/admin_header.html' %}
+
+<div class="untree_co-hero  " style="background-image: url('static/images/home1.jpeg'); padding: 70px 50px;">
+    <div class="container">
+        <br><br>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <form action="" method="post" style="border: 1px solid #ddd; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+
+                        <h1 style="margin-bottom: 20px; text-align: center;"> CAMPAIGN</h1>
+
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                            <thead>
+                                <tr style="background-color: #f1f1f1;">
+                                    <th style="border: 1px solid #ddd; padding: 10px;">Sl. No</th>
+                                    <th style="border: 1px solid #ddd; padding: 10px;">Campaign Name</th>
+                                    <th style="border: 1px solid #ddd; padding: 10px;">Date</th>
+                                    <th style="border: 1px solid #ddd; padding: 10px;">Venue</th>
+                                    <th style="border: 1px solid #ddd; padding: 10px;">Campaign Date</th>
+                                    <th style="border: 1px solid #ddd; padding: 10px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in data['view'] %}
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 10px;">{{ loop.index }}</td>
+                                    <td style="border: 1px solid #ddd; padding: 10px;">{{ i.campaign_name }}</td>
+                                    <td style="border: 1px solid #ddd; padding: 10px;">{{ i.date }}</td>
+                                    <td style="border: 1px solid #ddd; padding: 10px;">{{ i.venue }}</td>
+                                    <td style="border: 1px solid #ddd; padding: 10px;">{{ i.campaign_date }}</td>
+                                    <td style="border: 1px solid #ddd; padding: 10px;">
+                                        <a href="?action=delete&campaign_id={{ i.campaign_id }}" style="color: #ff0000; text-decoration: none;">Delete</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+</form>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /.row -->
+    </div> <!-- /.container -->
+</div> <!-- /.untree_co-hero -->
+
